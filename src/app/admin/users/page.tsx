@@ -7,8 +7,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -24,14 +22,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import {
-  Plus,
-  Edit,
   Trash2,
-  Stethoscope,
-  Phone,
-  Calendar,
   MoreVertical,
 } from "lucide-react";
 import { useState } from 'react';
@@ -202,22 +194,18 @@ export default function UsersPage() {
                 className="hover:bg-muted/50 transition-colors"
                 style={{ borderBottom: "1px solid #E5E7EB" }}
               >
-                {/* Tên */}
                 <TableCell className="text-xs text-left px-4 font-medium">
                   {user.name}
                 </TableCell>
 
-                {/* Email */}
                 <TableCell className="text-xs text-left px-4">
                   {user.email}
                 </TableCell>
 
-                {/* Số điện thoại */}
                 <TableCell className="text-xs text-left px-4">
                   {user.phone}
                 </TableCell>
 
-                {/* Vai trò */}
                 <TableCell className="text-xs text-left px-4">
                   <select
                     value={user.role}
@@ -230,7 +218,6 @@ export default function UsersPage() {
                   </select>
                 </TableCell>
 
-                {/* Trạng thái */}
                 <TableCell className="text-xs text-left px-4">
                   <select
                     value={user.status}
@@ -242,12 +229,10 @@ export default function UsersPage() {
                   </select>
                 </TableCell>
 
-                {/* Ngày tạo */}
                 <TableCell className="text-xs text-left px-4">
                   {user.createdAt}
                 </TableCell>
 
-                {/* Thao tác */}
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

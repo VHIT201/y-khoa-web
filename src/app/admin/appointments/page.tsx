@@ -2,22 +2,11 @@
 
 import { useState } from 'react';
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -33,13 +22,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import {
-  Plus,
-  Edit,
   Trash2,
-  Stethoscope,
-  Phone,
   Calendar,
   MoreVertical,
 } from "lucide-react";
@@ -57,6 +41,7 @@ interface Appointment {
 
 export default function AppointmentsPage() {
   const [appointments, setAppointments] = useState<Appointment[]>([
+    // data demo
     {
       id: 1,
       patientName: 'Nguyễn Văn A',
@@ -250,7 +235,6 @@ export default function AppointmentsPage() {
           </TableBody>
         </Table>
       </div>
-
 
       {filteredAppointments.length === 0 && (
         <div className="text-center py-8 text-gray-500">

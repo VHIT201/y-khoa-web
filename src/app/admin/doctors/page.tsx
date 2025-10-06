@@ -1,6 +1,30 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -19,8 +43,7 @@ import {
   Calendar,
   MoreVertical,
 } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
+
 
 interface Doctor {
   id: number;
@@ -33,6 +56,7 @@ interface Doctor {
 
 export default function DoctorsPage() {
   const [doctors, setDoctors] = useState<Doctor[]>([
+    // data demo
     {
       "id": 1,
       "name": "Dr. Nguyễn Hồng Trung",
@@ -597,27 +621,22 @@ export default function DoctorsPage() {
                 className="hover:bg-muted/50 transition-colors"
                 style={{ borderBottom: "1px solid #E5E7EB" }}
               >
-                {/* Tên bác sĩ */}
                 <TableCell className="text-xs text-left px-4 font-medium">
                   {doctor.name}
                 </TableCell>
 
-                {/* Chuyên khoa */}
                 <TableCell className="text-xs text-left px-4">
                   {doctor.specialty}
                 </TableCell>
 
-                {/* Email */}
                 <TableCell className="text-xs text-left px-4">
                   {doctor.email}
                 </TableCell>
 
-                {/* Số điện thoại */}
                 <TableCell className="text-xs text-left px-4">
                   {doctor.phone}
                 </TableCell>
 
-                {/* Trạng thái */}
                 <TableCell className="text-xs text-left px-4">
                   <Badge
                     variant={doctor.status === "active" ? "default" : "secondary"}
@@ -633,7 +652,6 @@ export default function DoctorsPage() {
                   </Badge>
                 </TableCell>
 
-                {/* Thao tác */}
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -672,83 +690,105 @@ export default function DoctorsPage() {
 
 
       {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-xl font-bold mb-4">
-              {editingDoctor ? 'Sửa bác sĩ' : 'Thêm bác sĩ'}
-            </h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">Tên bác sĩ</label>
-                <input
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>
+              {editingDoctor ? "Chỉnh sửa thông tin bác sĩ" : "Thêm bác sĩ mới"}
+            </DialogTitle>
+            <DialogDescription>
+              {editingDoctor
+                ? "Cập nhật chi tiết thông tin của bác sĩ."
+                : "Điền thông tin chi tiết để thêm bác sĩ mới vào hệ thống."}
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="doctorName">Tên bác sĩ</Label>
+                <Input
+                  id="doctorName"
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full p-2 border rounded"
+                  placeholder="Nhập tên bác sĩ"
                   required
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Chuyên khoa</label>
-                <input
+              <div className="space-y-2">
+                <Label htmlFor="specialty">Chuyên khoa</Label>
+                <Input
+                  id="specialty"
                   type="text"
                   value={formData.specialty}
-                  onChange={(e) => setFormData({ ...formData, specialty: e.target.value })}
-                  className="w-full p-2 border rounded"
+                  onChange={(e) =>
+                    setFormData({ ...formData, specialty: e.target.value })
+                  }
+                  placeholder="Nhập chuyên khoa"
                   required
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Email</label>
-                <input
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full p-2 border rounded"
+                  placeholder="Nhập email"
                   required
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Số điện thoại</label>
-                <input
+              <div className="space-y-2">
+                <Label htmlFor="phone">Số điện thoại</Label>
+                <Input
+                  id="phone"
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full p-2 border rounded"
+                  placeholder="Nhập số điện thoại"
                   required
                 />
               </div>
-              <div>
-                <label className="block text-sm mb-1">Trạng thái</label>
-                <select
-                  value={formData.status}
-                  onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                  className="w-full p-2 border rounded"
-                >
-                  <option value="active">Hoạt động</option>
-                  <option value="inactive">Không hoạt động</option>
-                </select>
-              </div>
-              <div className="flex space-x-2">
-                <button
-                  type="submit"
-                  className="bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/80"
-                >
-                  {editingDoctor ? 'Cập nhật' : 'Thêm'}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-                >
-                  Hủy
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="status">Trạng thái</Label>
+              <Select
+                value={formData.status}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, status: value as "active" | "inactive" })
+                }
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Chọn trạng thái" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="active">Hoạt động</SelectItem>
+                  <SelectItem value="inactive">Không hoạt động</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Hủy
+              </Button>
+              <Button type="submit">
+                {editingDoctor ? "Cập nhật" : "Thêm"}
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
