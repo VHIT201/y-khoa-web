@@ -1,6 +1,49 @@
 'use client';
 
 import { useState } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import {
+  Plus,
+  Edit,
+  Trash2,
+  Stethoscope,
+  Phone,
+  Calendar,
+  MoreVertical,
+} from "lucide-react";
+import { Button } from '@/components/ui/button';
 
 interface Appointment {
   id: number;
@@ -85,85 +128,129 @@ export default function AppointmentsPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Quản lý Đặt lịch</h1>
-        <div className="flex items-center space-x-4">
-          <select
-            value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-            className="p-2 border rounded"
-          >
-            <option value="all">Tất cả trạng thái</option>
-            <option value="pending">Chờ xác nhận</option>
-            <option value="confirmed">Đã xác nhận</option>
-            <option value="completed">Hoàn thành</option>
-            <option value="cancelled">Đã hủy</option>
-          </select>
-        </div>
+        <Select value={filterStatus} onValueChange={setFilterStatus}>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Tất cả trạng thái" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Tất cả trạng thái</SelectItem>
+            <SelectItem value="pending">Chờ xác nhận</SelectItem>
+            <SelectItem value="confirmed">Đã xác nhận</SelectItem>
+            <SelectItem value="completed">Hoàn thành</SelectItem>
+            <SelectItem value="cancelled">Đã hủy</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+      <div className="rounded-lg overflow-hidden" style={{ border: "1px solid #E5E7EB" }}>
+        <Table className="border-0">
+          <TableHeader className="h-12">
+            <TableRow className="bg-primary">
+              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
                 Bệnh nhân
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              </TableHead>
+              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
                 Bác sĩ
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              </TableHead>
+              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
                 Chuyên khoa
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              </TableHead>
+              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
                 Ngày giờ
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              </TableHead>
+              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
                 Trạng thái
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+              </TableHead>
+              <TableHead className="text-center text-white uppercase font-bold text-xs px-4">
+                Thao tác
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody className="bg-white text-gray-700 text-center">
             {filteredAppointments.map((appointment) => (
-              <tr key={appointment.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+              <TableRow
+                key={appointment.id}
+                className="hover:bg-muted/50 transition-colors"
+                style={{ borderBottom: "1px solid #E5E7EB" }}
+              >
+                {/* Bệnh nhân */}
+                <TableCell className="text-xs text-left px-4 font-medium">
                   {appointment.patientName}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                </TableCell>
+
+                {/* Bác sĩ */}
+                <TableCell className="text-xs text-left px-4">
                   {appointment.doctorName}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                </TableCell>
+
+                {/* Chuyên khoa */}
+                <TableCell className="text-xs text-left px-4">
                   {appointment.specialty}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {appointment.date} {appointment.time}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </TableCell>
+
+                {/* Ngày giờ */}
+                <TableCell className="text-xs text-left px-4">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4 text-muted-foreground" />
+                    <span>{appointment.date} {appointment.time}</span>
+                  </div>
+                </TableCell>
+
+                {/* Trạng thái */}
+                <TableCell className="text-xs text-left px-4">
                   <select
                     value={appointment.status}
-                    onChange={(e) => handleStatusChange(appointment.id, e.target.value as Appointment['status'])}
-                    className={`px-2 py-1 text-xs font-semibold rounded-full border-0 ${getStatusColor(appointment.status)}`}
+                    onChange={(e) =>
+                      handleStatusChange(
+                        appointment.id,
+                        e.target.value as Appointment["status"]
+                      )
+                    }
+                    className={`px-2 py-1 text-xs font-semibold rounded-full border-0 ${getStatusColor(
+                      appointment.status
+                    )}`}
                   >
                     <option value="pending">Chờ xác nhận</option>
                     <option value="confirmed">Đã xác nhận</option>
                     <option value="completed">Hoàn thành</option>
                     <option value="cancelled">Đã hủy</option>
                   </select>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                  <button
-                    onClick={() => handleDelete(appointment.id)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    Xóa
-                  </button>
-                </td>
-              </tr>
+                </TableCell>
+
+                {/* Thao tác */}
+                <TableCell>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-8 w-8 p-0"
+                        title="Thao tác"
+                      >
+                        <MoreVertical className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      align="end"
+                      className="w-40 bg-white border-0"
+                    >
+                      <DropdownMenuItem
+                        onClick={() => handleDelete(appointment.id)}
+                        className="cursor-pointer text-red-600 hover:bg-primary hover:text-red-700"
+                      >
+                        <Trash2 className="mr-2 h-4 w-4" />
+                        Xóa
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
+
 
       {filteredAppointments.length === 0 && (
         <div className="text-center py-8 text-gray-500">

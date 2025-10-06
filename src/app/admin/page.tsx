@@ -46,10 +46,9 @@ const revenueData = [
 
 export default function AdminPage() {
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-6">
 
-      {/* Thống kê tổng quan - Card chuyên nghiệp */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="Tổng Bệnh Nhân"
           value="12,456"
