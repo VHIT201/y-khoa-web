@@ -19,12 +19,12 @@ const getToken = () => {
 };
 
 // Helper to build URL with query params
-const buildUrl = (path: string, params?: Record<string, any>) => {
+const buildUrl = (path: string, params?: Record<string, unknown>) => {
   const url = new URL(`${API_BASE_URL}${path}`);
   if (params) {
     Object.keys(params).forEach(key => {
       if (params[key] !== undefined && params[key] !== null) {
-        url.searchParams.append(key, params[key]);
+        url.searchParams.append(key, String(params[key]));
       }
     });
   }
