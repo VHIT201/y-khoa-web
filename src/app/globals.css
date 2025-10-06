@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* Theme Configuration - Light Theme Only */
+:root {
+  /* Primary Colors */
+  --primary: #2B6E98;
+  --primary-foreground: #ffffff;
+
+  /* Background Colors */
+  --background: #ffffff;
+  --foreground: #2B6E98;
+
+  /* Secondary Colors */
+  --secondary: #f1f5f9;
+  --secondary-foreground: #2B6E98;
+
+  /* Accent Colors */
+  --accent: #e0f2fe;
+  --accent-foreground: #0c4a6e;
+
+  /* Muted Colors */
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+
+  /* Border and Input */
+  --border: #e2e8f0;
+  --input: #ffffff;
+  --ring: #2B6E98;
+
+  /* Card Colors */
+  --card: #ffffff;
+  --card-foreground: #2B6E98;
+
+  /* Popover Colors */
+  --popover: #ffffff;
+  --popover-foreground: #2B6E98;
+
+  /* Destructive Colors */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Border Radius */
+  --radius: 0.5rem;
+
+  /* Sidebar Colors */
+  --sidebar: hsl(0 0% 98%);
+  --sidebar-foreground: hsl(240 5.3% 26.1%);
+  --sidebar-primary: hsl(217.2 91.2% 59.8%);
+  --sidebar-primary-foreground: hsl(0 0% 98%);
+  --sidebar-accent: hsl(240 4.8% 95.9%);
+  --sidebar-accent-foreground: hsl(240 5.9% 10%);
+  --sidebar-border: hsl(220 13% 91%);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
