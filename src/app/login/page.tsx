@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -14,6 +15,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  console.log('dsadsads ', error)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +41,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-background flex">
       {/* Left side - Image (7/12 width) */}
       <div className="hidden lg:flex lg:w-7/12 relative">
-        <img
+        <Image
           src="https://insmart.com.vn/wp-content/uploads/2021/06/BV-QT-My-2.jpg"
           alt="Bệnh viện Quốc tế Mỹ"
           className="w-full h-full object-cover"

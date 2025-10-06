@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
-import { Users, Calendar, TrendingUp, DollarSign } from 'lucide-react';
+import { Users, Calendar, DollarSign } from 'lucide-react';
 import StatCard from './components/home-cards';
 
 // Dữ liệu mẫu cho biểu đồ

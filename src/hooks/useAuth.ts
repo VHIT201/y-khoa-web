@@ -22,6 +22,7 @@ export function useAuth() {
         setUser(parsedUser);
       } catch (error) {
         localStorage.removeItem('user');
+        console.error('Failed to parse user data:', error);
       }
     }
     setLoading(false);

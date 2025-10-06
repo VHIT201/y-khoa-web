@@ -88,14 +88,14 @@ export default function UsersPage() {
     }
   };
 
-  const getRoleText = (role: string) => {
-    switch (role) {
-      case 'admin': return 'Admin';
-      case 'doctor': return 'Bác sĩ';
-      case 'patient': return 'Bệnh nhân';
-      default: return role;
-    }
-  };
+  // const getRoleText = (role: string) => {
+  //   switch (role) {
+  //     case 'admin': return 'Admin';
+  //     case 'doctor': return 'Bác sĩ';
+  //     case 'patient': return 'Bệnh nhân';
+  //     default: return role;
+  //   }
+  // };
 
   const getStatusColor = (status: string) => {
     return status === 'active'

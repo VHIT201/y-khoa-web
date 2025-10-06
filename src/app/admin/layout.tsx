@@ -3,6 +3,7 @@
 import { ReactNode, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../hooks/useAuth";
+import Image from "next/image";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -72,7 +73,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <div className="flex justify-between items-center w-full mx-auto">
           {/* Logo và tiêu đề */}
           <div className="flex items-center gap-3">
-            <img
+            <Image
               src="https://aih.com.vn/storage/logo-aih.png" 
               alt="Medical Logo"
               className="h-12 w-auto object-cover bg-white rounded-md"
@@ -86,7 +87,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               <p className="text-sm">Xin chào, <span className="font-bold">Bác sĩ Hoàng</span></p>
               <p className="text-xs text-white">Khoa Nội tổng hợp</p>
             </div>
-            <img
+            <Image
               src="https://aih.com.vn/storage/doctors/7c1121282da8ad9011a7b4d978eb24b8.png" 
               alt="User Avatar"
               className="h-10 w-10 rounded-full border-2 border-white"
