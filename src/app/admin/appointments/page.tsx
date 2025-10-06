@@ -71,15 +71,15 @@ export default function AppointmentsPage() {
     }
   };
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'pending': return 'Chờ xác nhận';
-      case 'confirmed': return 'Đã xác nhận';
-      case 'completed': return 'Hoàn thành';
-      case 'cancelled': return 'Đã hủy';
-      default: return status;
-    }
-  };
+  // const getStatusText = (status: string) => {
+  //   switch (status) {
+  //     case 'pending': return 'Chờ xác nhận';
+  //     case 'confirmed': return 'Đã xác nhận';
+  //     case 'completed': return 'Hoàn thành';
+  //     case 'cancelled': return 'Đã hủy';
+  //     default: return status;
+  //   }
+  // };
 
   return (
     <div className="space-y-6">

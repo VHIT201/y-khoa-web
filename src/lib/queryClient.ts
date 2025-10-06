@@ -1,6 +1,16 @@
 import { QueryClient } from '@tanstack/react-query';
 import { API_BASE_URL } from '../config/api';
 
+interface QueryKeyParams {
+  queryKey: readonly unknown[];
+}
+
+interface MutationParams {
+  url: string;
+  method?: string;
+  body?: unknown;
+}
+
 const getToken = () => {
   if (typeof window !== 'undefined') {
     return localStorage.getItem('token');
@@ -36,8 +46,8 @@ const handleResponse = async (response: Response) => {
   return response.json();
 };
 
-const defaultQueryFn = async ({ queryKey }: any) => {
-  const [path, params] = queryKey;
+const defaultQueryFn = async ({ queryKey }: QueryKeyParams) => {
+  const [path, params] = queryKey as [string, Record<string, unknown>?];
   const token = getToken();
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
@@ -50,7 +60,8 @@ const defaultQueryFn = async ({ queryKey }: any) => {
   return handleResponse(response);
 };
 
-const defaultMutationFn = async ({ url, method = 'POST', body }: any) => {
+const defaultMutationFn = async (variables: unknown) => {
+  const { url, method = 'POST', body } = variables as MutationParams;
   const token = getToken();
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
