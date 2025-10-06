@@ -3,7 +3,6 @@
 import { ReactNode, useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "../../hooks/useAuth";
-import Image from "next/image";
 
 import {
   LayoutDashboard,
@@ -89,13 +88,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       <header className="bg-white shadow-md h-20 fixed top-0 left-0 right-0 p-4 border-b border-border z-30">
         <div className="flex justify-between items-center w-full h-full mx-auto">
           <div className="flex items-center gap-3">
-<<<<<<< HEAD
-            <Image
-              src="https://aih.com.vn/storage/logo-aih.png" 
-=======
             <img
               src="https://aih.com.vn/storage/logo-aih.png"
->>>>>>> feat/redesign-ui
               alt="Medical Logo"
               className="h-12 w-auto object-cover bg-white rounded-md"
             />
@@ -111,19 +105,14 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               </p>
               <p className="text-xs text-muted-foreground">Khoa Nội tổng hợp</p>
             </div>
-<<<<<<< HEAD
-            <Image
-              src="https://aih.com.vn/storage/doctors/7c1121282da8ad9011a7b4d978eb24b8.png" 
-=======
             <img
               src="https://aih.com.vn/storage/doctors/7c1121282da8ad9011a7b4d978eb24b8.png"
->>>>>>> feat/redesign-ui
               alt="User Avatar"
               className="h-10 w-10 rounded-full border-2 border-primary object-cover"
             />
-          </div>
-        </div>
-      </header>
+          </div >
+        </div >
+      </header >
 
       <div className="flex h-screen pt-20">
 
@@ -160,6 +149,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           {children}
         </main>
       </div>
-    </div>
+    </div >
   );
 }

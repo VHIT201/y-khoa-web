@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { Users, Calendar, DollarSign } from 'lucide-react';
 import StatCard from './components/home-cards';
 
-// Dữ liệu mẫu cho biểu đồ
+// data demo
 const patientTrendData = [
   { tháng: 'Tháng 1', bệnhNhân: 1200 },
   { tháng: 'Tháng 2', bệnhNhân: 1350 },
@@ -83,7 +83,7 @@ export default function AdminPage() {
         />
       </div>
 
-      {/* Biểu đồ xu hướng bệnh nhân */}
+      {/* patient trend chart */}
       <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-xl font-semibold mb-4 text-gray-900">
           Xu Hướng Số Lượng Bệnh Nhân Theo Tháng
@@ -100,7 +100,7 @@ export default function AdminPage() {
         </ResponsiveContainer>
       </div>
 
-      {/* Biểu đồ chuyên khoa và phân bổ độ tuổi */}
+      {/* age distribution chart */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4 text-gray-900">
