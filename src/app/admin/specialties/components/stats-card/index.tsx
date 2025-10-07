@@ -6,7 +6,10 @@ interface StatsCardProps {
   title: string;
   value: string | number;
   description?: string;
+  borderColor: string;
   textColor: string;
+  icon?: LucideIcon;
+  showDot?: boolean;
   dotColor?: string;
 }
 
@@ -14,22 +17,36 @@ export default function StatsCard({
   title,
   value,
   description,
+  borderColor,
   textColor,
-  dotColor,
+  icon: Icon,
+  showDot = false,
+  dotColor = 'bg-gray-500'
 }: StatsCardProps) {
   return (
-    <div className="group relative overflow-hidden cursor-pointer rounded-lg bg-white shadow-lg hover:shadow-2xl p-6 border border-primary/10 hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02]">
-      <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-      <div className="relative flex items-start justify-between">
-        <div className="flex-1">
-          <p className={`${textColor} text-xs transition-colors duration-300`}>{title}</p>
-          <p className="mt-1 text-2xl font-semibold text-gray-900 transition-colors duration-300">{value}</p>
-          <div className="mt-2 flex items-center gap-2">
-            <span className="text-xs text-gray-500 transition-colors duration-300">{description}</span>
+    <Card className={`group relative overflow-hidden hover:shadow-lg transition-all duration-300 border-l-4 ${borderColor}`}>
+      {/* Background overlay for hover effect */}
+      <div className="absolute inset-0 bg-white transition-colors duration-300 group-hover:bg-gray-50"></div>
+
+      {/* Content */}
+      <div className="relative">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-bold text-gray-700 group-hover:text-primary transition-colors duration-300">
+            {title}
+          </CardTitle>
+          {Icon ? (
+            <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+          ) : showDot ? (
+            <div className={`h-4 w-4 ${dotColor} rounded-full group-hover:scale-110 transition-transform duration-300`}></div>
+          ) : null}
+        </CardHeader>
+        <CardContent>
+          <div className={`text-2xl font-bold ${textColor} group-hover:scale-105 transition-all duration-300`}>
+            {value}
           </div>
-        </div>
-        <div className={`h-3 w-3 rounded-full ${dotColor} mt-1`}></div>
+          <p className="text-xs text-muted-foreground group-hover:text-gray-600 transition-colors duration-300">{description}</p>
+        </CardContent>
       </div>
-    </div>
+    </Card>
   );
 }

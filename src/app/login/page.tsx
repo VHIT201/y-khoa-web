@@ -42,9 +42,8 @@ export default function LoginPage() {
       {/* Left side - Image (7/12 width) */}
       <div className="hidden lg:flex lg:w-7/12 relative">
         <Image
-          src="/login/BV-QT-My-2.jpg"
+          src="https://insmart.com.vn/wp-content/uploads/2021/06/BV-QT-My-2.jpg"
           alt="Bệnh viện Quốc tế Mỹ"
-          fill
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
