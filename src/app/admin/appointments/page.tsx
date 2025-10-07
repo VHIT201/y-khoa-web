@@ -128,62 +128,62 @@ export default function AppointmentsPage() {
       </div>
 
       <div className="rounded-lg overflow-hidden" style={{ border: "1px solid #E5E7EB" }}>
-        <Table className="border-0">
+        <Table className="border-0 w-lvw xl:w-full">
           <TableHeader className="h-12">
             <TableRow className="bg-primary">
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
+                STT
+              </TableHead>
+              <TableHead className="text-left text-white uppercase">
                 Bệnh nhân
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-left text-white uppercase">
                 Bác sĩ
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-left text-white uppercase">
                 Chuyên khoa
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
                 Ngày giờ
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
                 Trạng thái
               </TableHead>
-              <TableHead className="text-center text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
                 Thao tác
               </TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody className="bg-white text-gray-700 text-center">
-            {filteredAppointments.map((appointment) => (
+            {filteredAppointments.map((appointment, index) => (
               <TableRow
                 key={appointment.id}
                 className="hover:bg-muted/50 transition-colors"
                 style={{ borderBottom: "1px solid #E5E7EB" }}
               >
-                {/* Bệnh nhân */}
-                <TableCell className="text-xs text-left px-4 font-medium">
+                <TableCell>{index + 1}</TableCell>
+
+                <TableCell className="text-left">
                   {appointment.patientName}
                 </TableCell>
 
-                {/* Bác sĩ */}
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-left">
                   {appointment.doctorName}
                 </TableCell>
 
-                {/* Chuyên khoa */}
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-left">
                   {appointment.specialty}
                 </TableCell>
 
-                {/* Ngày giờ */}
-                <TableCell className="text-xs text-left px-4">
-                  <div className="flex items-center gap-1">
+                <TableCell className="text-center">
+                  <div className="flex items-center justify-center gap-1">
                     <Calendar className="w-4 h-4 text-muted-foreground" />
-                    <span>{appointment.date} {appointment.time}</span>
+                    <span>{appointment.date} / {appointment.time}</span>
                   </div>
                 </TableCell>
 
-                {/* Trạng thái */}
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-center">
                   <select
                     value={appointment.status}
                     onChange={(e) =>
@@ -203,7 +203,6 @@ export default function AppointmentsPage() {
                   </select>
                 </TableCell>
 
-                {/* Thao tác */}
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

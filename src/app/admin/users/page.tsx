@@ -132,7 +132,7 @@ export default function UsersPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Quản lý user</h1>
+        <h1 className="text-2xl font-bold">Quản lý User</h1>
         <div className="flex items-center gap-3">
           <Select value={filterRole} onValueChange={setFilterRole}>
             <SelectTrigger className="w-[200px]">
@@ -160,53 +160,58 @@ export default function UsersPage() {
       </div>
 
       <div className="rounded-lg overflow-hidden" style={{ border: "1px solid #E5E7EB" }}>
-        <Table className="border-0">
+        <Table className="border-0 w-lvw xl:w-full">
           <TableHeader className="h-12">
             <TableRow className="bg-primary">
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase pl-3">
+                STT
+              </TableHead>
+              <TableHead className="text-left text-white uppercase">
                 Tên
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-left text-white uppercase">
                 Email
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
-                Số điện thoại
+              <TableHead className="text-left text-white uppercase">
+                Liên hệ
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
                 Vai trò
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
                 Trạng thái
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
                 Ngày tạo
               </TableHead>
-              <TableHead className="text-center text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase pr-4">
                 Thao tác
               </TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody className="bg-white text-gray-700 text-center">
-            {filteredUsers.map((user) => (
+            {filteredUsers.map((user, index) => (
               <TableRow
                 key={user.id}
                 className="hover:bg-muted/50 transition-colors"
                 style={{ borderBottom: "1px solid #E5E7EB" }}
               >
-                <TableCell className="text-xs text-left px-4 font-medium">
+                <TableCell className="pl-3">{index + 1}</TableCell>
+
+                <TableCell className="text-left">
                   {user.name}
                 </TableCell>
 
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-left">
                   {user.email}
                 </TableCell>
 
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-left">
                   {user.phone}
                 </TableCell>
 
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-center">
                   <select
                     value={user.role}
                     onChange={(e) => handleRoleChange(user.id, e.target.value as User["role"])}
@@ -218,7 +223,7 @@ export default function UsersPage() {
                   </select>
                 </TableCell>
 
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-center">
                   <select
                     value={user.status}
                     onChange={(e) => handleStatusChange(user.id, e.target.value as User["status"])}
@@ -229,7 +234,7 @@ export default function UsersPage() {
                   </select>
                 </TableCell>
 
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-center">
                   {user.createdAt}
                 </TableCell>
 

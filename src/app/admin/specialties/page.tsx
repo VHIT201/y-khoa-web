@@ -512,37 +512,37 @@ export default function SpecialtiesPage() {
 
       {/* Table Section */}
       <div className="rounded-lg overflow-hidden" style={{ border: "1px solid #E5E7EB" }}>
-        <Table className="border-0">
+        <Table className="border-0 w-lvw">
           <TableHeader className="h-12">
             <TableRow className="bg-primary">
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase pl-4">
                 STT
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-left text-white uppercase">
                 Chuyên khoa
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-left text-white uppercase">
                 Khoa
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-left text-white uppercase">
                 Trưởng khoa
               </TableHead>
-              <TableHead className="text-center text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
                 Bác sĩ
               </TableHead>
-              <TableHead className="text-center text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
                 Bệnh nhân
               </TableHead>
-              <TableHead className="text-center text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-left text-white uppercase">
                 Liên hệ
               </TableHead>
-              <TableHead className="text-center text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
                 Trạng thái
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
                 Cập nhật
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase pr-4">
                 Thao tác
               </TableHead>
             </TableRow>
@@ -555,31 +555,33 @@ export default function SpecialtiesPage() {
                 className="hover:bg-muted/50 transition-colors"
                 style={{ borderBottom: "1px solid #E5E7EB" }}
               >
-                <TableCell className="text-xs">{index + 1}</TableCell>
+                <TableCell className="pl-4">{index + 1}</TableCell>
+
                 <TableCell>
-                  <div className="text-left px-2">
-                    <div className="text-xs">{specialty.name}</div>
-                    <div className="text-xs text-justify text-muted-foreground max-w-xs truncate">
+                  <div className="text-left">
+                    <div>{specialty.name}</div>
+                    <div className="text-justify text-muted-foreground max-w-xs truncate">
                       {specialty.description}
                     </div>
                   </div>
                 </TableCell>
-                <TableCell className="text-xs text-left px-4">
+
+                <TableCell className="text-left">
                   {specialty.department}
                 </TableCell>
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-left">
                   {specialty.headDoctor}
                 </TableCell>
-                <TableCell className="text-xs text-center px-2">
+                <TableCell className="text-center">
                   {specialty.doctorsCount}
                 </TableCell>
-                <TableCell className="text-xs text-center px-2">
+                <TableCell className="text-center">
                   {specialty.patientsCount}
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center justify-center gap-1 px-2">
+                  <div className="flex items-center justify-start gap-1">
                     <Phone className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-xs">{specialty.phone}</span>
+                    <span>{specialty.phone}</span>
                   </div>
                 </TableCell>
                 <TableCell>
@@ -604,9 +606,9 @@ export default function SpecialtiesPage() {
                   </Badge>
                 </TableCell>
                 <TableCell>
-                  <div className="flex justify-center items-center gap-1 px-2">
+                  <div className="flex justify-center items-center gap-1">
                     <Calendar className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-xs">{specialty.updatedAt}</span>
+                    <span>{specialty.updatedAt}</span>
                   </div>
                 </TableCell>
                 <TableCell>
@@ -615,7 +617,7 @@ export default function SpecialtiesPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="h-8 w-8 p-0 "
+                        className="h-8 w-8"
                         title="Thao tác"
                       >
                         <MoreVertical className="h-4 w-4" />
@@ -647,7 +649,7 @@ export default function SpecialtiesPage() {
         {specialties?.length === 0 && (
           <div className="text-center py-8">
             <Stethoscope className="mx-auto h-12 w-12 text-gray-400" />
-            <h3 className="mt-2 text-xs text-xs text-gray-900">
+            <h3 className="mt-2 text-xs text-gray-900">
               Chưa có chuyên khoa
             </h3>
             <p className="mt-1 text-xs text-gray-500">

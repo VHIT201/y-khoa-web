@@ -3,6 +3,7 @@
 import { ReactNode, useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "../../hooks/useAuth";
+import { useRef } from "react";
 
 import {
   LayoutDashboard,
@@ -21,6 +22,20 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const { isAuthenticated, isAdmin, loading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
+  const [openMenu, setOpenMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpenMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     if (!loading && (!isAuthenticated || !isAdmin)) {
@@ -80,7 +95,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     { href: "/admin/specialties", label: "Quản lý chuyên khoa", icon: Stethoscope },
     { href: "/admin/doctors", label: "Quản lý bác sĩ", icon: User },
     { href: "/admin/appointments", label: "Quản lý Đặt lịch", icon: CalendarCheck },
-    { href: "/admin/users", label: "Quản lý user", icon: Users },
+    { href: "/admin/users", label: "Quản lý User", icon: Users },
   ];
 
   return (
@@ -98,21 +113,42 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             </span>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="text-right">
-              <p className="text-sm font-semibold text-gray-800">
-                Xin chào, <span className="text-primary">Bác sĩ Hoàng</span>
-              </p>
-              <p className="text-xs text-muted-foreground">Khoa Nội tổng hợp</p>
+          <div className="relative" ref={menuRef}>
+            <div
+              onClick={() => setOpenMenu((prev) => !prev)}
+              className="flex items-center gap-3 cursor-pointer hover:bg-gray-50 rounded-lg p-2 transition-colors"
+            >
+              <div className="text-right">
+                <p className="text-sm font-semibold text-gray-800">
+                  Xin chào, <span className="text-primary">Bác sĩ Hoàng</span>
+                </p>
+                <p className="text-xs text-muted-foreground">Khoa Nội tổng hợp</p>
+              </div>
+              <img
+                src="https://aih.com.vn/storage/doctors/7c1121282da8ad9011a7b4d978eb24b8.png"
+                alt="User Avatar"
+                className="h-10 w-10 rounded-full border-2 border-primary object-cover"
+              />
             </div>
-            <img
-              src="https://aih.com.vn/storage/doctors/7c1121282da8ad9011a7b4d978eb24b8.png"
-              alt="User Avatar"
-              className="h-10 w-10 rounded-full border-2 border-primary object-cover"
-            />
-          </div >
-        </div >
-      </header >
+
+            {/* Dropdown menu */}
+            {openMenu && (
+              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg z-50 animate-fade-in">
+                <button
+                  onClick={() => {
+                    localStorage.clear();
+                    router.push('/login');
+                  }}
+                  className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                >
+                  <LogOut className="w-4 h-4 text-gray-500" />
+                  Đăng xuất
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
 
       <div className="flex h-screen pt-20">
 
@@ -129,16 +165,23 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 <a
                   key={item.href}
                   href={item.href}
-                  className={`
-                        flex items-center gap-3 p-3 rounded-lg font-medium text-sm transition-all duration-200
+                  className={
+                    `flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-300
                         ${isActive
-                      ? "bg-primary text-primary-foreground shadow-sm"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-primary"
-                    }`}
+                      ? "bg-gradient-to-r from-primary/90 to-primary text-white shadow-lg shadow-primary/30 scale-[1.02]"
+                      : "text-gray-600 hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 hover:shadow-md hover:shadow-primary/10"
+                    }
+                  `
+                  }
                 >
-                  <Icon className="w-5 h-5 flex-shrink-0" />
-                  {item.label}
+                  <Icon
+                    className={`w-5 h-5 flex-shrink-0 transition-transform duration-300
+                    ${isActive ? "scale-110" : "group-hover:scale-110"}
+                  `}
+                  />
+                  <span>{item.label}</span>
                 </a>
+
               );
             })}
           </nav>

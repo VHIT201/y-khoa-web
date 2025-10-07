@@ -582,62 +582,68 @@ export default function DoctorsPage() {
         <h1 className="text-2xl font-bold">Quản lý bác sĩ</h1>
         <Button
           onClick={handleAdd}
-          className="bg-button hover:bg-button/90"
+          className="bg-button hover:bg-button/90 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-button/20"
         >
           <Plus className="w-4 h-4 mr-2" />
           Thêm bác sĩ
         </Button>
       </div>
 
+      {/* Table Section */}
       <div className="rounded-lg overflow-hidden" style={{ border: "1px solid #E5E7EB" }}>
-        <Table className="border-0">
+        <Table className="border-0 w-lvw xl:w-full">
           <TableHeader className="h-12">
             <TableRow className="bg-primary">
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase pl-4">
+                STT
+              </TableHead>
+              <TableHead className="text-left text-white uppercase">
                 Tên bác sĩ
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-left text-white uppercase">
                 Chuyên khoa
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-left text-white uppercase">
                 Email
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
-                Số điện thoại
+              <TableHead className="text-left text-white uppercase">
+                Liên hệ
               </TableHead>
-              <TableHead className="text-left text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase">
                 Trạng thái
               </TableHead>
-              <TableHead className="text-center text-white uppercase font-bold text-xs px-4">
+              <TableHead className="text-center text-white uppercase pr-4">
                 Thao tác
               </TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody className="bg-white text-gray-700 text-center">
-            {doctors.map((doctor) => (
+            {doctors.map((doctor, index) => (
               <TableRow
                 key={doctor.id}
                 className="hover:bg-muted/50 transition-colors"
                 style={{ borderBottom: "1px solid #E5E7EB" }}
               >
-                <TableCell className="text-xs text-left px-4 font-medium">
+                <TableCell className="pl-4">{index + 1}</TableCell>
+
+                <TableCell className="text-left">
                   {doctor.name}
                 </TableCell>
 
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-left">
                   {doctor.specialty}
                 </TableCell>
 
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-left">
                   {doctor.email}
                 </TableCell>
 
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-left">
                   {doctor.phone}
                 </TableCell>
 
-                <TableCell className="text-xs text-left px-4">
+                <TableCell className="text-center">
                   <Badge
                     variant={doctor.status === "active" ? "default" : "secondary"}
                     className="inline-flex w-fit items-center gap-1 px-2 mx-auto"
