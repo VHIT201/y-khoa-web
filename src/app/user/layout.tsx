@@ -43,7 +43,7 @@ export default function UserLayout({ children }: UserLayoutProps) {
             <span className="text-sm text-gray-600">Welcome, User</span>
             <button
               onClick={() => {
-                localStorage.removeItem('user');
+                localStorage.clear();
                 router.push('/login');
               }}
               className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition-colors"
